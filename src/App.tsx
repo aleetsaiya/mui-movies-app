@@ -4,8 +4,9 @@ import { Header } from "./components/Header";
 import { CustomThemeProvider } from "./theme";
 import { Main } from "./components/Main";
 import { Footer } from "./components/Footer";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { NotFound } from "./components/NotFound";
+import { MovieDetail } from "./components/MovieDetail";
 
 const App = () => {
   return (
@@ -13,10 +14,10 @@ const App = () => {
       <CssBaseline />
       <Header />
       <Routes>
-        <Route path="/" element={<Main />} />
-        {/* <Route path="/tv-shows" element={<Main />} />
-        <Route path="/movies" element={<Main />} />
-        <Route path="/my-list" element={<Main />} /> */}
+        <Route path="/" element={<Navigate to="home" replace />} />
+        <Route path="home" element={<Main />}>
+          <Route path=":id" element={<MovieDetail />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

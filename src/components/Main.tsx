@@ -6,16 +6,18 @@ import {
   useGetTrendingQuery,
 } from "../services/moviesApi";
 import { MovieList } from "./MovieList";
+import { Outlet } from "react-router-dom";
 
 export const Main = () => {
   const { data: movies } = useGetTrendingQuery("movie");
-  const { data: tvs } = useGetTrendingQuery("tv");
+
   const { data: topRatedMovies } = useGetTopRatedQuery();
   const { data: animtaions } = useDiscoverQuery("Animation");
   const { data: fantasyMovies } = useDiscoverQuery("Fantasy");
+  const { data: warMovies } = useDiscoverQuery("War");
 
   return (
-    <Box m={4}>
+    <Box m={4} pb={4} sx={{ overflow: "hidden" }}>
       <MovieList
         movies={movies?.results ?? []}
         title="Trending"
@@ -24,13 +26,6 @@ export const Main = () => {
       <MovieList
         movies={topRatedMovies?.results ?? []}
         title="Top Rated"
-        sx={{
-          marginTop: "60px",
-        }}
-      />
-      <MovieList
-        movies={tvs?.results ?? []}
-        title="TV Shows"
         sx={{
           marginTop: "60px",
         }}
@@ -49,6 +44,14 @@ export const Main = () => {
           marginTop: "60px",
         }}
       />
+      <MovieList
+        movies={warMovies?.results ?? []}
+        title="War"
+        sx={{
+          marginTop: "60px",
+        }}
+      />
+      <Outlet />
     </Box>
   );
 };

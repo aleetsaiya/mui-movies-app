@@ -17,6 +17,7 @@ export const MovieList = ({
   sx?: object;
 }) => {
   const [page, setPage] = useState(0);
+  const [focusMovieId, setFocusMovieId] = useState(-1);
 
   const handleToNextPage = () => {
     setPage(page + 1);
@@ -27,8 +28,16 @@ export const MovieList = ({
     setPage(page - 1);
   };
 
+  const handleMouseEnter = (id: number) => {
+    setFocusMovieId(id);
+  };
+
+  const handleMouseLeave = () => {
+    setFocusMovieId(-1);
+  };
+
   return (
-    <Box mt={4} sx={{ overflowX: "hidden", ...sx }}>
+    <Box mt={4} sx={{ ...sx }}>
       <Typography variant="h5" component="h3" sx={{ fontWeight: "bold" }}>
         {title}
       </Typography>
@@ -58,11 +67,18 @@ export const MovieList = ({
           sx={{
             overflowX: "visible",
             transform: `translateX(${page * -320 * 5}px)`,
-            transition: "all ease-in-out 0.7s",
+            transition: "all ease-in-out 0.5s",
           }}
         >
           {movies.map((movie) => (
-            <Movie key={movie.id} movie={movie} imgType={imgType} />
+            <Movie
+              key={movie.id}
+              movie={movie}
+              imgType={imgType}
+              darken={focusMovieId !== -1 && focusMovieId !== movie.id}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            />
           ))}
         </Stack>
         {page * 320 * 5 < movies.length * 320 && (

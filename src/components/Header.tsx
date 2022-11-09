@@ -5,7 +5,7 @@ import { Navbar } from "./UI/Navbar";
 import { useGetTrendingQuery } from "../services/moviesApi";
 import { Movie } from "../types/movies";
 
-const MovieInfo = ({ movie }: { movie: Movie | undefined }) => {
+const Info = ({ movie }: { movie: Movie | undefined }) => {
   return (
     <Box
       display={{ xs: "none", lg: "block" }}
@@ -44,16 +44,14 @@ export const Header = () => {
   const theme = useAppTheme();
   const pages = ["Home", "TV Shows", "Movies", "My List"];
   const pagesRoute = {
-    Home: "/",
+    Home: "home",
     "TV Shows": "tv-shows",
     Movies: "movies",
     "My List": "my-list",
   };
 
   const { data, error, isLoading, isFetching } = useGetTrendingQuery("movie");
-
-  const randomInt = Math.floor(Math.random() * 5);
-  const showedMovie = data?.results[randomInt];
+  const showedMovie = data?.results[0];
 
   return (
     <Box
@@ -68,7 +66,7 @@ export const Header = () => {
       }}
     >
       <FadeOutBottom background={theme.palette.background.default} />
-      <MovieInfo movie={showedMovie} />
+      <Info movie={showedMovie} />
       <Navbar pages={pages} pagesRoute={pagesRoute} />
     </Box>
   );
