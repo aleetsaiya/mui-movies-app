@@ -7,7 +7,7 @@ import { Footer } from "./components/Footer";
 import { Routes, Route } from "react-router-dom";
 import { NotFound } from "./components/NotFound";
 
-const App = (): JSX.Element => {
+const App = () => {
   return (
     <CustomThemeProvider>
       <CssBaseline />

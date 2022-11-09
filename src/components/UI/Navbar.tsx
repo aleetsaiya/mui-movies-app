@@ -35,7 +35,8 @@ export const Navbar = ({
     <AppBar
       position="static"
       sx={{
-        background: "transparent",
+        background:
+          "linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3))",
         boxShadow: "none",
         paddingLeft: {
           es: 1.5,
@@ -67,6 +68,7 @@ export const Navbar = ({
           />
           <Typography
             variant="h6"
+            component="h1"
             sx={{
               textDecoration: "none",
               color: "white",
