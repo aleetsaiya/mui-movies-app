@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/material";
 
 export const RotatePoster = ({
@@ -10,46 +10,73 @@ export const RotatePoster = ({
   poster: string | null;
   children: React.ReactNode;
 }) => {
+  const [isFocus, setIsFocus] = useState(false);
+  let timeOutId: NodeJS.Timeout;
+
+  const handleMouseEnter = () => {
+    timeOutId = setTimeout(() => {
+      setIsFocus(true);
+    }, 200);
+  };
+
+  const handleMouseLeave = () => {
+    clearTimeout(timeOutId);
+    setIsFocus(false);
+  };
+
+  const style = {
+    position: "relative",
+    transition: "all 0.5s",
+    transformStyle: "preserve-3d",
+    boxShadow: "0 4px 8px 0 rgba(0,0,0,0.8)",
+  };
+
+  const focusStyle = {
+    ...style,
+    transform: "rotateY(180deg)",
+  };
+
   return (
     <Box
       width="500px"
       height="750px"
-      sx={{
-        position: "relative",
-        transition: "all ease 0.8s",
-        transformStyle: "preserve-3d",
-        boxShadow: "0 4px 8px 0 rgba(0,0,0,0.8)",
-        transitionDelay: "0.2s",
-        "&:hover": {
-          transform: "rotateY(180deg)",
-        },
-      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      <img
-        width="100%"
-        height="100%"
-        src={`https://image.tmdb.org/t/p/w500/${poster}`}
-        style={{
-          position: "absolute",
-          borderRadius: "8px",
-          backfaceVisibility: "hidden",
-        }}
-        alt={title}
-      />
-      <Box
-        width="100%"
-        height="100%"
-        p={4}
-        color="#e7e7e7"
-        sx={{
-          position: "absolute",
-          borderRadius: "8px",
-          transform: "rotateY(180deg)",
-          backfaceVisibility: "hidden",
-          background: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(https://image.tmdb.org/t/p/w500/${poster})`,
-        }}
-      >
-        {children}
+      <Box width="100%" height="100%" sx={isFocus ? focusStyle : style}>
+        <img
+          width="100%"
+          height="100%"
+          src={`https://image.tmdb.org/t/p/w500/${poster}`}
+          style={{
+            position: "absolute",
+            borderRadius: "8px",
+            backfaceVisibility: "hidden",
+          }}
+          alt={title}
+        />
+        <Box
+          width="100%"
+          height="100%"
+          p={4}
+          color="#e7e7e7"
+          sx={{
+            position: "absolute",
+            borderRadius: "8px",
+            transform: "rotateY(180deg) scaleX(-1)",
+            backfaceVisibility: "hidden",
+            background: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(https://image.tmdb.org/t/p/w500/${poster})`,
+            backgroundSize: "cover",
+          }}
+        >
+          <Box
+            sx={{
+              transform: "scaleX(-1)",
+            }}
+          >
+            {children}
+          </Box>
+        </Box>
       </Box>
     </Box>
   );

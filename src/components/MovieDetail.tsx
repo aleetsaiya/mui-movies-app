@@ -1,7 +1,15 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSearchQuery } from "../services/moviesApi";
-import { Box, Typography, Rating, Stack, Link, Container } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Rating,
+  Stack,
+  Link,
+  Container,
+  IconButton,
+} from "@mui/material";
 import { Header } from "./Header";
 import { styled } from "@mui/material/styles";
 import { RotatePoster } from "./UI/RotatePoster";
@@ -11,6 +19,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import InsertInvitationIcon from "@mui/icons-material/InsertInvitation";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const StyledRating = styled(Rating)({
   "& .MuiRating-iconFilled": {
@@ -98,21 +107,35 @@ export const MovieDetail = () => {
     id: string;
   }>();
   const id = params.id as string;
-  const { data, isLoading, error } = useSearchQuery(id);
+  const { data } = useSearchQuery(id);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   });
 
-  console.log("data", data);
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   return (
     <>
       {data && (
         <>
           <Header showedMovie={data} />
-          {/* wrapper */}
-          <Container>
+          <Container sx={{ position: "relative" }}>
+            <IconButton
+              size="medium"
+              onClick={handleGoBack}
+              sx={{
+                position: "absolute",
+                top: "-30px",
+                left: "-60px",
+                border: "solid 1px #cdcbcb",
+              }}
+            >
+              <ArrowBackIcon />
+            </IconButton>
             <Box
               display="flex"
               justifyContent="space-around"

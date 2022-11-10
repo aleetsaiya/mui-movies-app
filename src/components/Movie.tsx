@@ -1,7 +1,7 @@
 import React from "react";
 import { Basic } from "../types/movies";
 import { Box } from "@mui/material";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Backdrop = ({ darken }: { darken: boolean }) => {
   return (
@@ -34,7 +34,6 @@ export const Movie = ({
   onMouseLeave: () => void;
 }) => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   let imgSrc;
   if (imgType === "Poster")
@@ -43,8 +42,7 @@ export const Movie = ({
     imgSrc = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
 
   const handleClick = () => {
-    const currentPath = location.pathname;
-    navigate(currentPath.concat(`/${movie.id}`));
+    navigate(`/movies/${movie.id}`);
   };
 
   let style: any = {
