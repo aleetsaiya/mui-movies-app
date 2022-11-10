@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Movie, Basic, Genres } from "../types/movies";
+import { Basic, Genres } from "../types/movies";
 import { APIKEY } from "./moviesAPIKey";
 
 interface ApiResponse<T> {
@@ -34,7 +34,7 @@ export const moviesApi = createApi({
   reducerPath: "moviesApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://api.themoviedb.org/3" }),
   endpoints: (builder) => ({
-    getTrending: builder.query<ApiResponse<Movie>, "movie" | "tv">({
+    getTrending: builder.query<ApiResponse<Basic>, "movie" | "tv">({
       query: (type) => {
         console.log(`Fetch "${type} trending" data`);
         return `/trending/${type}/week?api_key=${APIKEY}`;
@@ -53,8 +53,18 @@ export const moviesApi = createApi({
         return `/discover/movie?api_key=${APIKEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genresId}&with_watch_monetization_types=flatrate`;
       },
     }),
+    search: builder.query<Basic, string>({
+      query: (id) => {
+        console.log(`Search "${id}"`);
+        return `movie/${id}?api_key=${APIKEY}`;
+      },
+    }),
   }),
 });
 
-export const { useGetTrendingQuery, useDiscoverQuery, useGetTopRatedQuery } =
-  moviesApi;
+export const {
+  useGetTrendingQuery,
+  useDiscoverQuery,
+  useGetTopRatedQuery,
+  useSearchQuery,
+} = moviesApi;

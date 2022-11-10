@@ -1,3 +1,15 @@
+export interface Company {
+  id: string;
+  logo_path: string | null;
+  name: string;
+  origin_country: string;
+}
+
+export interface Country {
+  iso_3166_1: string;
+  name: string;
+}
+
 export interface Basic {
   genre_ids: number[];
   popularity: number;
@@ -13,10 +25,11 @@ export interface Basic {
   original_title: string;
   overview: string;
   poster_path: string | null;
-}
-
-export interface Movie extends Basic {
-  media_type: string;
+  media_type?: string;
+  tagline?: string;
+  homepage?: string;
+  production_companies?: Company[];
+  production_countries?: Country[];
 }
 
 export type Genres =

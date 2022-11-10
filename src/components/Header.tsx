@@ -2,10 +2,9 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import { useAppTheme } from "../app/hooks";
 import { Navbar } from "./UI/Navbar";
-import { useGetTrendingQuery } from "../services/moviesApi";
-import { Movie } from "../types/movies";
+import { Basic } from "../types/movies";
 
-const Info = ({ movie }: { movie: Movie | undefined }) => {
+const Info = ({ movie }: { movie: Basic | undefined }) => {
   return (
     <Box
       display={{ xs: "none", lg: "block" }}
@@ -22,7 +21,7 @@ const Info = ({ movie }: { movie: Movie | undefined }) => {
           {movie?.title}
         </Typography>
         <Typography paragraph width="25vw" fontSize="1.2rem" mt={2}>
-          {movie?.overview.slice(1, 120).concat(" ...")}
+          {movie?.overview.slice(0, 120).concat(" ...")}
         </Typography>
       </Box>
     </Box>
@@ -40,19 +39,19 @@ const FadeOutBottom = ({ background }: { background: string }) => {
   return <Box sx={sx}></Box>;
 };
 
-export const Header = () => {
+export const Header = ({
+  showedMovie,
+  showInfo = false,
+}: {
+  showedMovie: Basic | undefined;
+  showInfo?: boolean;
+}) => {
   const theme = useAppTheme();
-  const pages = ["Home", "TV Shows", "Movies", "My List"];
+  const pages = ["Home", "My List"];
   const pagesRoute = {
-    Home: "home",
-    "TV Shows": "tv-shows",
-    Movies: "movies",
-    "My List": "my-list",
+    Home: "/",
+    "My List": "/my-list",
   };
-
-  const { data, error, isLoading, isFetching } = useGetTrendingQuery("movie");
-  const showedMovie = data?.results[0];
-
   return (
     <Box
       height={{ xs: "40vh", lg: "70vh" }}
@@ -66,7 +65,7 @@ export const Header = () => {
       }}
     >
       <FadeOutBottom background={theme.palette.background.default} />
-      <Info movie={showedMovie} />
+      {showInfo && <Info movie={showedMovie} />}
       <Navbar pages={pages} pagesRoute={pagesRoute} />
     </Box>
   );

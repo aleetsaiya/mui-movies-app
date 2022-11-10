@@ -11,7 +11,7 @@ const Backdrop = ({ onClose }: { onClose: () => void }) => {
         left: 0,
         width: "100vw",
         height: "100vh",
-        background: "rgba(0, 0, 0, 0.7)",
+        background: "rgba(0, 0, 0, 0.1)",
       }}
       zIndex="modal"
       onClick={onClose}
@@ -28,16 +28,17 @@ const ModalOverlay = ({
 }) => {
   return (
     <Box
-      width="700px"
-      height="500px"
+      width="850px"
+      height="100vh"
       zIndex="modal"
-      bgcolor="#efefef"
-      color="#121212"
+      bgcolor="#242424"
+      color="white"
       sx={{
         position: "fixed",
-        top: "50%",
+        top: "20%",
         left: "50%",
-        transform: "translate(-50%, -50%)",
+        transform: "translateX(-50%)",
+        borderRadius: "8px",
       }}
     >
       {children}

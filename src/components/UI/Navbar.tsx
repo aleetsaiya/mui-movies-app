@@ -24,7 +24,7 @@ export const Navbar = ({
   const navigate = useNavigate();
 
   const handleClickedLogo = () => {
-    navigate("/home");
+    navigate("/");
   };
 
   const handleClickedPage = (page: string) => {

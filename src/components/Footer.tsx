@@ -19,7 +19,12 @@ export const Footer = () => {
         pb={5}
       >
         <CopyrightIcon sx={{ fontSize: "20px", marginRight: "8px" }} /> 2022 by
-        <Link href="https://github.com/aleetsaiya" ml={0.5}>
+        <Link
+          href="https://github.com/aleetsaiya"
+          ml={0.5}
+          target="_blank"
+          rel="noreferrer"
+        >
           Alee Tsai
         </Link>
       </Stack>

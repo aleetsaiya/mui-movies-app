@@ -22,14 +22,14 @@ const Backdrop = ({ darken }: { darken: boolean }) => {
 
 export const Movie = ({
   movie,
-  darken,
   imgType,
+  darken,
   onMouseEnter,
   onMouseLeave,
 }: {
   movie: Basic;
-  darken: boolean;
   imgType: "Poster" | "Rectangle";
+  darken: boolean;
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }) => {
@@ -47,19 +47,32 @@ export const Movie = ({
     navigate(currentPath.concat(`/${movie.id}`));
   };
 
+  let style: any = {
+    minWidth: "320px",
+    position: "relative",
+    borderRadius: "8px",
+    cursor: "pointer",
+    transition: "all ease 0.5s",
+    boxShadow: "0 4px 8px 0 rgba(0,0,0,0.8)",
+    "&:hover": {
+      transform: "scale(1.15) translateY(-15px)",
+      zIndex: "999",
+    },
+  };
+
+  if (imgType === "Poster") {
+    style = {
+      ...style,
+      "&:hover": {
+        ...style["&:hover"],
+        transform: "scale(1.1) translateY(-20px)",
+      },
+    };
+  }
+
   return (
     <Box
-      sx={{
-        minWidth: "320px",
-        position: "relative",
-        borderRadius: "8px",
-        cursor: "pointer",
-        transition: "all ease 0.5s",
-        "&:hover": {
-          transform: "scale(1.2)",
-          zIndex: "999",
-        },
-      }}
+      sx={style}
       mr={3}
       onClick={handleClick}
       onMouseEnter={() => onMouseEnter(movie.id)}

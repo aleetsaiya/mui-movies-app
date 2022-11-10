@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Typography, Stack, Box, IconButton } from "@mui/material";
 import { Movie } from "./Movie";
 import { Basic } from "../types/movies";
@@ -18,8 +18,11 @@ export const MovieList = ({
 }) => {
   const [page, setPage] = useState(0);
   const [focusMovieId, setFocusMovieId] = useState(-1);
+  const nextPageIconRef = useRef<HTMLButtonElement>(null);
+  const prevPageIconRef = useRef<HTMLButtonElement>(null);
 
   const handleToNextPage = () => {
+    if (page >= 4) return;
     setPage(page + 1);
   };
 
@@ -36,32 +39,50 @@ export const MovieList = ({
     setFocusMovieId(-1);
   };
 
+  const handleEnterContainer = () => {
+    if (nextPageIconRef.current !== null)
+      nextPageIconRef.current.style.visibility = "visible";
+    if (prevPageIconRef.current !== null)
+      prevPageIconRef.current.style.visibility = "visible";
+  };
+
+  const handleLeaveContainer = () => {
+    if (nextPageIconRef.current !== null)
+      nextPageIconRef.current.style.visibility = "hidden";
+    if (prevPageIconRef.current !== null)
+      prevPageIconRef.current.style.visibility = "hidden";
+  };
+
   return (
-    <Box mt={4} sx={{ ...sx }}>
+    <Box
+      mt={4}
+      sx={{ ...sx }}
+      onMouseEnter={handleEnterContainer}
+      onMouseLeave={handleLeaveContainer}
+    >
       <Typography variant="h5" component="h3" sx={{ fontWeight: "bold" }}>
         {title}
       </Typography>
-
       <Stack direction="row" mt={2} sx={{ position: "relative" }}>
-        {page !== 0 && (
-          <IconButton
-            onClick={handleToPrevPage}
-            size="large"
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "-20px",
-              transform: "translateY(-50%)",
-              background: "rgba(0, 0, 0, 0.15)",
-              "&:hover": {
-                background: "rgba(0, 0, 0, 0.35)",
-              },
-              zIndex: 999,
-            }}
-          >
-            <KeyboardArrowLeftIcon sx={{ width: "50px", height: "50px" }} />
-          </IconButton>
-        )}
+        <IconButton
+          ref={prevPageIconRef}
+          onClick={handleToPrevPage}
+          size="large"
+          sx={{
+            visibility: "hidden",
+            position: "absolute",
+            top: "50%",
+            left: "-20px",
+            transform: "translateY(-50%)",
+            background: "rgba(0, 0, 0, 0.15)",
+            "&:hover": {
+              background: "rgba(0, 0, 0, 0.35)",
+            },
+            zIndex: 998,
+          }}
+        >
+          <KeyboardArrowLeftIcon sx={{ width: "50px", height: "50px" }} />
+        </IconButton>
         <Stack
           direction="row"
           sx={{
@@ -81,25 +102,25 @@ export const MovieList = ({
             />
           ))}
         </Stack>
-        {page * 320 * 5 < movies.length * 320 && (
-          <IconButton
-            onClick={handleToNextPage}
-            size="large"
-            sx={{
-              position: "absolute",
-              top: "50%",
-              right: "-20px",
-              transform: "translateY(-50%)",
-              background: "rgba(0, 0, 0, 0.15)",
-              "&:hover": {
-                background: "rgba(0, 0, 0, 0.35)",
-              },
-              zIndex: 999,
-            }}
-          >
-            <KeyboardArrowRightIcon sx={{ width: "50px", height: "50px" }} />
-          </IconButton>
-        )}
+        <IconButton
+          ref={nextPageIconRef}
+          onClick={handleToNextPage}
+          size="large"
+          sx={{
+            visibility: "hidden",
+            position: "absolute",
+            top: "50%",
+            right: "-20px",
+            transform: "translateY(-50%)",
+            background: "rgba(0, 0, 0, 0.15)",
+            "&:hover": {
+              background: "rgba(0, 0, 0, 0.35)",
+            },
+            zIndex: 998,
+          }}
+        >
+          <KeyboardArrowRightIcon sx={{ width: "50px", height: "50px" }} />
+        </IconButton>
       </Stack>
     </Box>
   );
