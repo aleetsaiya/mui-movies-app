@@ -279,7 +279,10 @@ export const MovieDetail = () => {
                     fontWeight="bold"
                     textAlign="center"
                     fontSize={{ xs: "1rem", md: "2.125rem" }}
-                    mt={8}
+                    mt={{
+                      xs: 4,
+                      md: 8,
+                    }}
                   >
                     Production Countries
                   </Typography>
