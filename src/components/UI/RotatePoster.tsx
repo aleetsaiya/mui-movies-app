@@ -38,8 +38,9 @@ export const RotatePoster = ({
 
   return (
     <Box
-      width="500px"
-      height="750px"
+      width={{ xs: "250px", md: "500px" }}
+      height={{ xs: "350px", md: "700px" }}
+      mt={{ xs: 5, md: 0 }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

@@ -46,7 +46,10 @@ export const Movie = ({
   };
 
   let style: any = {
-    minWidth: "320px",
+    minWidth: {
+      xs: "160px",
+      md: "320px",
+    },
     position: "relative",
     borderRadius: "8px",
     cursor: "pointer",
@@ -71,7 +74,10 @@ export const Movie = ({
   return (
     <Box
       sx={style}
-      mr={3}
+      mr={{
+        xs: 1.5,
+        md: 3,
+      }}
       onClick={handleClick}
       onMouseEnter={() => onMouseEnter(movie.id)}
       onMouseLeave={() => onMouseLeave()}

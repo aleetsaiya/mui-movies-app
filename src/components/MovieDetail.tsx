@@ -41,14 +41,31 @@ const MovieInfo = ({
   releaseDate: string;
   homepage: string | undefined;
 }) => {
+  const fontSize = {
+    xs: "0.875rem",
+    md: "1.25rem",
+  };
   return (
     <>
-      <Stack direction="row" spacing={3} height={30} fontSize="20px">
+      <Stack
+        direction={{
+          xs: "column",
+          md: "row",
+        }}
+        spacing={3}
+        height={{
+          xs: "auto",
+          md: "30",
+        }}
+        fontSize={fontSize}
+      >
         <Box display="flex" alignItems="center" height="100%">
           <ThumbUpIcon
             sx={{
               marginRight: "8px",
-              fontSize: 20,
+              fontSize: {
+                fontSize,
+              },
               color: "lightblue",
             }}
           />{" "}
@@ -58,7 +75,9 @@ const MovieInfo = ({
           <InsertInvitationIcon
             sx={{
               marginRight: "8px",
-              fontSize: 20,
+              fontSize: {
+                fontSize,
+              },
               color: "lightgreen",
             }}
           />
@@ -71,8 +90,24 @@ const MovieInfo = ({
             value={voteAverage / 2}
             precision={0.5}
             readOnly
-            icon={<FavoriteIcon sx={{ fontSize: 20 }} />}
-            emptyIcon={<FavoriteBorderIcon sx={{ fontSize: 20 }} />}
+            icon={
+              <FavoriteIcon
+                sx={{
+                  fontSize: {
+                    fontSize,
+                  },
+                }}
+              />
+            }
+            emptyIcon={
+              <FavoriteBorderIcon
+                sx={{
+                  fontSize: {
+                    fontSize,
+                  },
+                }}
+              />
+            }
           />
         </Box>
       </Stack>
@@ -86,12 +121,19 @@ const MovieInfo = ({
         >
           <HomeIcon
             sx={{
-              fontSize: 20,
+              fontSize: {
+                fontSize,
+              },
               marginRight: "8px",
               verticalAlign: "middle",
             }}
           />
-          <Link href={homepage} target="_blank" rel="noreferrer">
+          <Link
+            href={homepage}
+            target="_blank"
+            rel="noreferrer"
+            fontSize={fontSize}
+          >
             {homepage.length > 43
               ? homepage.slice(0, 40).concat("...")
               : homepage}
@@ -139,13 +181,26 @@ export const MovieDetail = () => {
             <Box
               display="flex"
               justifyContent="space-around"
-              alignItems="flex-start"
+              alignItems={{
+                xs: "center",
+                md: "flex-start",
+              }}
               width="100%"
+              flexDirection={{
+                xs: "column",
+                md: "row",
+              }}
+              p={{ xs: 2, md: 0 }}
               mt={5}
             >
               {/* left */}
-              <Box pt={2} pr={6}>
-                <Typography variant="h3" fontWeight="bold" mb={5}>
+              <Box pt={2} pr={{ sx: 0, md: 6 }}>
+                <Typography
+                  variant="h3"
+                  fontWeight="bold"
+                  mb={5}
+                  fontSize={{ xs: "2rem", md: "3rem" }}
+                >
                   {data?.title}
                 </Typography>
                 <MovieInfo
@@ -157,7 +212,10 @@ export const MovieDetail = () => {
                 <Typography variant="h5" mt={7} mb={2} fontWeight="bold">
                   Overview
                 </Typography>
-                <Typography paragraph fontSize="1.15rem">
+                <Typography
+                  paragraph
+                  fontSize={{ sx: "0.875rem", md: "1.15rem" }}
+                >
                   {data.overview}
                 </Typography>
                 {data.tagline && (
@@ -165,7 +223,15 @@ export const MovieDetail = () => {
                     variant="h3"
                     component="h5"
                     color="#efefef"
-                    mt={10}
+                    mt={{
+                      xs: 5,
+                      md: 10,
+                    }}
+                    fontSize={{
+                      xs: "2rem",
+                      md: "3rem",
+                    }}
+                    mb={{ xs: 5, md: 0 }}
                     sx={{ fontFamily: "'Courgette', cursive" }}
                   >
                     {`"${data.tagline}"`}
@@ -182,6 +248,7 @@ export const MovieDetail = () => {
                   <Typography
                     variant="h4"
                     component="h5"
+                    fontSize={{ xs: "1rem", md: "2.125rem" }}
                     fontWeight="bold"
                     textAlign="center"
                   >
@@ -190,7 +257,7 @@ export const MovieDetail = () => {
                   {data.production_companies?.map((company) => (
                     <Box
                       key={company.id}
-                      fontSize="1.15rem"
+                      fontSize={{ xs: "0.875rem", md: "1.15rem" }}
                       textAlign="center"
                       mt={1}
                     >
@@ -211,6 +278,7 @@ export const MovieDetail = () => {
                     component="h5"
                     fontWeight="bold"
                     textAlign="center"
+                    fontSize={{ xs: "1rem", md: "2.125rem" }}
                     mt={8}
                   >
                     Production Countries
@@ -218,7 +286,7 @@ export const MovieDetail = () => {
                   {data.production_countries?.map((country) => (
                     <Box
                       key={country.iso_3166_1}
-                      fontSize="1.15rem"
+                      fontSize={{ xs: "0.875rem", md: "1.15rem" }}
                       textAlign="center"
                       mt={1}
                     >

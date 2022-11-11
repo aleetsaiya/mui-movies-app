@@ -20,8 +20,14 @@ export const Home = () => {
       <Header showedMovie={movies?.results[0]} showInfo />
       <Box
         m={4}
-        pl={6}
-        pb={4}
+        pl={{
+          xs: 2,
+          md: 6,
+        }}
+        pb={{
+          xs: 0,
+          md: 4,
+        }}
         sx={{
           overflow: "hidden",
         }}

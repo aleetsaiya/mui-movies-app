@@ -44,9 +44,10 @@ export const Header = ({
       sx={{
         position: "relative",
         width: "100%",
-        backgroundImage: showInfo
-          ? leftBottomShadowBackground
-          : bottomShadowBackground,
+        backgroundImage: {
+          xs: bottomShadowBackground,
+          md: showInfo ? leftBottomShadowBackground : bottomShadowBackground,
+        },
         backgroundRepeat: "no",
         backgroundSize: "cover",
         backgroundPosition: "center 30%",

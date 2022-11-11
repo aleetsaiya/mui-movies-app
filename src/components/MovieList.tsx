@@ -67,9 +67,12 @@ export const MovieList = ({
         <IconButton
           ref={prevPageIconRef}
           onClick={handleToPrevPage}
-          size="large"
+          size="medium"
           sx={{
-            visibility: "hidden",
+            visibility: {
+              xs: "visible",
+              md: "hidden",
+            },
             position: "absolute",
             top: "50%",
             left: "-20px",
@@ -87,7 +90,10 @@ export const MovieList = ({
           direction="row"
           sx={{
             overflowX: "visible",
-            transform: `translateX(${page * -320 * 5}px)`,
+            transform: {
+              xs: `translateX(${page * -320 * 1}px)`,
+              md: `translateX(${page * -320 * 5}px)`,
+            },
             transition: "all ease-in-out 0.5s",
           }}
         >
@@ -105,9 +111,12 @@ export const MovieList = ({
         <IconButton
           ref={nextPageIconRef}
           onClick={handleToNextPage}
-          size="large"
+          size="medium"
           sx={{
-            visibility: "hidden",
+            visibility: {
+              xs: "visible",
+              md: "hidden",
+            },
             position: "absolute",
             top: "50%",
             right: "-20px",

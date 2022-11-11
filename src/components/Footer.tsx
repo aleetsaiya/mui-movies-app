@@ -15,8 +15,14 @@ export const Footer = () => {
         alignItems="center"
         justifyContent="center"
         width="100%"
-        pt={5}
-        pb={5}
+        pt={{
+          xs: 0,
+          md: 5,
+        }}
+        pb={{
+          xs: 5,
+          md: 5,
+        }}
       >
         <CopyrightIcon sx={{ fontSize: "20px", marginRight: "8px" }} /> 2022 by
         <Link
