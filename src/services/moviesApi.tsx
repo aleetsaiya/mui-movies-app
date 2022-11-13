@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Basic, Genres } from "../types/movies";
-import { APIKEY } from "./moviesAPIKey";
+import { OMDB_APIKEY as APIKEY } from "./apiKey";
 
 interface ApiResponse<T> {
   page: number;
