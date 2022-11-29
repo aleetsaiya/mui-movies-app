@@ -26,10 +26,11 @@ export const Header = ({
   showInfo?: boolean;
   children?: React.ReactNode;
 }) => {
-  const pages = ["Home", "My List"];
+  // const pages = ["Home", "My List"];
+  const pages = ["Home"];
   const pagesRoute = {
     Home: "/",
-    "My List": "/my-list",
+    // "My List": "/my-list",
   };
 
   const theme = useAppTheme();

@@ -57,7 +57,7 @@ export const Movie = ({
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.8)",
     "&:hover": {
       transform: "scale(1.15) translateY(-15px)",
-      zIndex: "999",
+      zIndex: "997",
     },
   };
 

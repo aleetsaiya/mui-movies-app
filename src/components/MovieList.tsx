@@ -22,7 +22,6 @@ export const MovieList = ({
   const prevPageIconRef = useRef<HTMLButtonElement>(null);
 
   const handleToNextPage = () => {
-    if (page >= 4) return;
     setPage(page + 1);
   };
 
@@ -97,9 +96,9 @@ export const MovieList = ({
             transition: "all ease-in-out 0.5s",
           }}
         >
-          {movies.map((movie) => (
+          {[...movies, ...movies, ...movies].map((movie, index) => (
             <Movie
-              key={movie.id}
+              key={movie.id.toString() + "-" + index.toString()}
               movie={movie}
               imgType={imgType}
               darken={focusMovieId !== -1 && focusMovieId !== movie.id}
