@@ -8,3 +8,4 @@ Mock Netflix home page APP.
 + add login functionality to this app
 + make users store their favorite movies
 + add more pages
++ fix carousel bug -> users click "next page button" even do not remain any items
