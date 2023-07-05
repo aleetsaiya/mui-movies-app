@@ -1,4 +1,4 @@
-<img width="1464" alt="movie-app-preview" src="https://github.com/aleetsaiya/mui-movies-app/assets/67775387/e3272e89-6352-41c5-80b2-659fcd796828"># mui-movies-app
+# MUI Movies APP
 
 Mock Netflix home page APP.
 
